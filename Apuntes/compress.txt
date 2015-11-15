@@ -1,0 +1,1 @@
+comprime la respuesta haciendo que sea menos pesada para enviar por internet, el navegador la descomprime automaticamente.

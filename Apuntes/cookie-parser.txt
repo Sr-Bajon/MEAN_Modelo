@@ -1,0 +1,9 @@
+parsea las cookies y rellena el objeto req.cookies con objetos con el nombre de las cookies.¡
+
+
+    var cookieParser = require('cookie-parser');
+
+    app.use(cookieParser(config.sesionPass, {
+        secure: true,
+        httpOnly: true
+    }));

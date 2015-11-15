@@ -1,0 +1,1 @@
+es un logger, la diferencia con morgan es que lo hace en un archivo nuevo cada 24 horas, por lo que es mas apropiado para produccion

@@ -1,0 +1,10 @@
+csurf permite controlar los ataques cross sitting (creo que no se escribe asi)
+
+genera un token que normalmente se imprime en el formulario en un campo oculto, cuando se recibe la peticion post de ese formulario se comprueba el token a ver si coincide. csurf hace esto autoaticamente.
+
+Si usamos una API deberiamos cargarlo despues de las rutas de la API para que no les pida un token tb
+
+
+var csurf = require('csurf');
+app.use(csurf());  //habilitado para todos los metodos menos GET, HEAD y
+// OPTIONS, si usamos una API deberiamos cargarlo despues de la API

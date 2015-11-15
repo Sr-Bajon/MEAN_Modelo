@@ -1,0 +1,17 @@
+Los directorios dist(por convenio) será donde se almacenen los archivos finales despues de realizar las tareas de grunt, minificar, generar css con LESS y demas.
+
+
+Algunos plugins populares:
+
+Plugin			Description
+contrib-jshint		Validate files using jshint
+contrib-uglify		Minify JS files using UglifyJS
+contrib-watch		Run tasks whenever watched files are changed
+contrib-clean		Clean up files and folders
+contrib-copy		Copy files and folders
+contrib-concat		Combine files into a single file
+contrib-cssmin		Compress CSS files
+contrib-less		Compile LESS files to CSS
+contrib-imagemin	Minify PNG, JPG, and GIFs
+contrib-compass		Compile SASS to CSS using Compass
+contrib-htmlmin		Minify HTML files

@@ -1,0 +1,19 @@
+{
+  "name": "site",
+  "version": "0.0.0",
+  "authors": [
+    "DrVicio"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+
+  }
+}

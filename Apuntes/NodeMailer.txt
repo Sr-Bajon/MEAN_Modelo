@@ -1,0 +1,107 @@
+//hay que instalar tb  nodemailer-smtp-transport y xoauth2
+
+//archivo nodemailer.config.js
+
+/*jslint node: true */
+"use strict";
+
+var nodemailer = require('nodemailer'),
+    smtTransport = require('nodemailer-smtp-transport'),
+    xoauth2 = require('xoauth2'),
+    config = require('./config.js');
+
+module.exports = function(){
+
+    var generator = xoauth2.createXOAuth2Generator({
+        user: config.google.user,
+        clientId: config.google.googleID,
+        clientSecret: config.google.googleSecret,
+        refreshToken: config.google.refreshToken
+        //accessToken: opcional, debería estar guardado en caché
+    });
+
+    //evento que se da cuando se renueva el token
+    generator.on("token", function(token){
+        console.log("User: ", token.user); // e-mail address
+        console.log("New access token: ", token.accessToken);
+        console.log("New access token timeout: ", token.timeout); // TTL in seconds
+        //el nuevo token debería guardarse en cache o bd
+    });
+
+    smtTransport = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            xoauth2: generator
+        }
+    });
+
+    return smtTransport;
+};
+
+
+//archivo  enviarEmail.js en controllers
+/*jslint node: true */
+"use strict";
+
+var nodemailer = require('nodemailer'),
+    smtTransport = require('nodemailer-smtp-transport'),
+    xoauth2 = require('xoauth2'),
+    config = require('../../config/config.js');
+
+module.exports = function(from, to, subject, text) {
+    var generator = xoauth2.createXOAuth2Generator({
+        user: config.google.user,
+        clientId: config.google.googleID,
+        clientSecret: config.google.googleSecret,
+        refreshToken: config.google.refreshToken
+        //accessToken: opcional, deberia recuperarse de la bd o cache
+        //accessURL: Opocional, Endpoint para generar el token, por defecto el de google
+    });
+
+    //evento que se da cuando se renueva el token
+    generator.on("token", function (token) {
+        console.log("User: ", token.user); // e-mail address
+        console.log("New access token: ", token.accessToken);
+        console.log("New access token timeout: ", token.timeout); // TTL in seconds
+        //el nuevo token debería guardarse en cache o bd
+    });
+
+    smtTransport = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            xoauth2: generator
+        }
+    });
+
+    var mailOptions = {
+        from: from,
+        to: to,
+        subject: subject,
+        text: text.toString()
+    };
+
+    smtTransport.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Message enviado: ' + info.response);
+        }
+    });
+};
+
+
+//en errorDomain.js
+
+            try {
+                if(process.env.NODE_ENV == 'production') {
+                    var from = 'SERVER FATAL ERROR',
+                        to = 'ismael.dai@gmail.com',
+                        subject = 'SERVER ERROR',
+                        text = err;
+                    require('./enviarEmail')(from, to, subject, err);
+                }
+            }catch(err){
+                if(process.env.NODE_ENV == 'production') {
+                    console.log('No se ha podido enviar el email de error');
+                }
+            }

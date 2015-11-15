@@ -1,0 +1,2 @@
+1) Npm init
+2) npm install -g browserify (si es que no está instalado)

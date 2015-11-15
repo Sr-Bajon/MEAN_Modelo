@@ -1,0 +1,14 @@
+permite almacenar datos en req.flash
+
+req.flash('dato', 'valor');
+
+y para recuperarlo
+
+req.flash('dato');
+
+Se borran automaticamente despues de usarlos en una vista (view)
+
+
+
+var flash = require('connect-flash');
+app.use(flash());

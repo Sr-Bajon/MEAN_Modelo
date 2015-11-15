@@ -1,0 +1,1 @@
+permite el uso de sesiones, se almacenaran en req.session

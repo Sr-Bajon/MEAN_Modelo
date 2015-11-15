@@ -1,0 +1,12 @@
+Debe ponerse antes de cualquier modulo que necesite saber el metodo de la peticion, tal como csurf.
+
+Sobreescribe la propiedad req.method con un nuevo valor
+
+Por defecto es X-HTTP-Method-Override
+
+Sirve para poder usar metodos como DELETE o PUT que no se admiten por defecto en NODE, permite usar
+metodos como app.put o app.delete en vez de siempre app.post o app.get
+
+
+    var methodOverride = require('method-override');
+    app.use(methodOverride());

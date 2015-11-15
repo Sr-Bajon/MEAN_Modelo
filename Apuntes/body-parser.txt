@@ -1,0 +1,18 @@
+bodyParser: Parsea el body en las peticiones POST, la información se encontrará en request.body
+
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
+
+Hay otra forma de usarlo que es directamente en el middleware de cada peticion, especificando si es JSON, urlencoded o lo que sea en cada una individualmente.
+
+
+Debe ir siempre antes de cualquier peticion que se pueda hacer, para parsearla
+
+
+
+
+    var bodyParser = require('body-parser');
+
+
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());

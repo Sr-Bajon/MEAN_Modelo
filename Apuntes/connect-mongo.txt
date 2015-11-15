@@ -1,0 +1,12 @@
+Permite guardar la sesion actual en Mongo.
+
+
+    var MongoStore = require('connect-mongo')(session);
+        app.use(session({
+            resave : false,
+            saveUninitialized: true,
+            secret : config.sesionPass,
+
+            store: new MongoStore({mongooseConnection: db.connection})
+
+        }));

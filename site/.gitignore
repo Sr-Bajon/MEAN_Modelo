@@ -1,0 +1,8 @@
+node_modules
+*.*~
+*.~
+public/vendor/bower
+.idea
+config/env/development.js
+config/env/production.js
+config/log
